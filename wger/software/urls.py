@@ -38,6 +38,11 @@ urlpatterns = [
         name='features',
     ),
     path(
+        'workouts',
+        TemplateView.as_view(template_name='workouts.html'),
+        name='workouts',
+    ),
+    path(
         'code',
         RedirectView.as_view(permanent=True, url='https://github.com/wger-project/wger'),
         name='code',

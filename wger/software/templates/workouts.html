@@ -1,0 +1,359 @@
+
+{% extends "template_features.html" %}
+{% load i18n static wger_extras %}
+
+{#           #}
+{# Opengraph #}
+{#           #}
+{% block opengraph %}
+    {{ block.super }}
+    <meta property="og:title" content="{% translate 'Workouts' %} - wger">
+    <meta property="og:description"
+          content="{% blocktranslate %}Discover effective workout routines including the popular Push/Pull/Legs split for beginners.{% endblocktranslate %}">
+{% endblock %}
+
+{% block opengraphimages %}
+    <meta property="og:image" content="{% static 'images/logos/logo-font.svg' %}">
+{% endblock %}
+
+{#         #}
+{# Content #}
+{#         #}
+{% block template %}
+
+    <!-- header -->
+    <header>
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg px-4">
+            <div class="container-xl">
+                <a class="navbar-brand" href="{% url 'core:index' %}">
+                    <img src="{% static 'images/logos/logo-font.svg' %}" alt="wger logo"/>
+                </a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item mx-2 my-1">
+                            <a class="nav-link fw-semibold" aria-current="page"
+                               href="https://www.google.co.in">
+                                <i class="fas fa-home"></i> {% translate "Home" %}
+                            </a>
+                        </li>
+                        <li class="nav-item mx-2 my-1">
+                            <a class="nav-link fw-semibold" aria-current="page"
+                               href="{% url 'software:about-us' %}">{% translate "Contact" %}
+                            </a>
+                        </li>
+                        <li class="nav-item mx-2 my-1">
+                            <a class="nav-link fw-semibold active"
+                               href="{% url 'software:workouts' %}">
+                                {% translate "Workouts" %}
+                            </a>
+                        </li>
+                        <li class="nav-item mx-2 my-1">
+                            <a class="nav-link fw-semibold"
+                               href="{% url 'exercise:exercise:overview' %}">
+                                {% translate "Exercises" %}
+                            </a>
+                        </li>
+                        <li class="nav-item mx-2 my-1">
+                            <a class="nav-link fw-semibold"
+                               href="https://play.google.com/store/apps/details?id=de.wger.flutter">
+                                {% translate "Mobile app" %}
+                            </a>
+                        </li>
+                        <li class="nav-item mx-2 my-1">
+                            <a class="nav-link fw-semibold"
+                               href="https://www.buymeacoffee.com/wger">
+                                {% translate "Donate" %}
+                            </a>
+                        </li>
+                        <li class="nav-item mx-2 my-1">
+                            <a class="nav-link fw-semibold" href="https://github.com/wger-project">
+                                {% translate "Develop" %}
+                            </a>
+                        </li>
+                        <li class="nav-item mx-2 my-1">
+                            <a class="nav-link fw-semibold" href="https://discord.gg/rPWFv6W">
+                                {% translate "Community" %}
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- buttons -->
+                    {% if not user.is_authenticated %}
+                        <div class="d-flex gap-2 my-2 my-lg-0">
+                            <a role="button" class="btn btn-transparent"
+                               href="{% url 'core:user:login' %}">
+                                {% translate "Login" %}
+                            </a>
+                            {% if allow_registration %}
+                                <a role="button" class="btn btn-primary rounded-1 bg-dark-blue px-4"
+                                   href="{% url 'core:user:registration' %}">
+                                    {% translate "Register" %}
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-xl">
+            <!-- hero section -->
+            <section class="row px-3 mb-5 d-flex align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h1 class="font-bebas-neue display-3 uppercase mb-4">
+                        {% translate "Effective Workout Routines" %}
+                    </h1>
+                    <p class="lead">
+                        {% translate "Discover proven workout routines to build strength and muscle" %}
+                    </p>
+                </div>
+            </section>
+        </div>
+    </header>
+
+    <!-- main content -->
+    <main>
+        <div class="container-xl">
+            <!-- PPL Routine Section -->
+            <section class="main-section mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <h2 class="font-bebas-neue display-4 uppercase text-center mb-5">
+                            {% translate "3-Day Push/Pull/Legs Routine" %}
+                        </h2>
+                        <p class="text-center lead mb-5">
+                            {% translate "Here's a sample 3-day PPL routine suitable for beginners:" %}
+                        </p>
+                        
+                        <div class="row g-4">
+                            <!-- Day 1: Push -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-dark-blue text-white text-center">
+                                        <h3 class="h4 mb-0 font-bebas-neue">{% translate "Day 1: Push" %}</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text mb-3">
+                                            {% translate "Focuses on chest, shoulders, and triceps" %}
+                                        </p>
+                                        <h5 class="h6 fw-bold mb-2">{% translate "Key Exercises:" %}</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-dumbbell text-dark-blue me-2"></i>{% translate "Bench Press" %}</li>
+                                            <li><i class="fas fa-dumbbell text-dark-blue me-2"></i>{% translate "Overhead Press" %}</li>
+                                            <li><i class="fas fa-dumbbell text-dark-blue me-2"></i>{% translate "Triceps Pushdowns" %}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Day 2: Pull -->
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-success text-white text-center">
+                                        <h3 class="h4 mb-0 font-bebas-neue">{% translate "Day 2: Pull" %}</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text mb-3">
+                                            {% translate "Targets the back and biceps" %}
+                                        </p>
+                                        <h5 class="h6 fw-bold mb-2">{% translate "Key Exercises:" %}</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-dumbbell text-success me-2"></i>{% translate "Deadlifts" %}</li>
+                                            <li><i class="fas fa-dumbbell text-success me-2"></i>{% translate "Pull-ups" %}</li>
+                                            <li><i class="fas fa-dumbbell text-success me-2"></i>{% translate "Bicep Curls" %}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Day 3: Legs -->
+                            <div class="col-lg-4 col-md-6 mx-auto">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-header bg-warning text-dark text-center">
+                                        <h3 class="h4 mb-0 font-bebas-neue">{% translate "Day 3: Legs" %}</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text mb-3">
+                                            {% translate "Works the lower body including quads, hamstrings, glutes, and calves" %}
+                                        </p>
+                                        <h5 class="h6 fw-bold mb-2">{% translate "Key Exercises:" %}</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-dumbbell text-warning me-2"></i>{% translate "Squats" %}</li>
+                                            <li><i class="fas fa-dumbbell text-warning me-2"></i>{% translate "Romanian Deadlifts" %}</li>
+                                            <li><i class="fas fa-dumbbell text-warning me-2"></i>{% translate "Leg Press" %}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Information Section -->
+            <section class="main-section bg-light-blue p-5">
+                <div class="container-xl">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 text-center">
+                            <h3 class="font-bebas-neue display-5 uppercase mb-4">
+                                {% translate "Why Choose PPL?" %}
+                            </h3>
+                            <p class="lead mb-4">
+                                {% translate "The Push/Pull/Legs split is one of the most effective workout routines for building muscle and strength. It allows for optimal recovery while training each muscle group with adequate frequency." %}
+                            </p>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="p-3">
+                                        <i class="fas fa-calendar-alt fa-2x text-dark-blue mb-3"></i>
+                                        <h5>{% translate "3-6 Days/Week" %}</h5>
+                                        <p class="small">{% translate "Flexible scheduling options" %}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3">
+                                        <i class="fas fa-users fa-2x text-success mb-3"></i>
+                                        <h5>{% translate "Beginner Friendly" %}</h5>
+                                        <p class="small">{% translate "Easy to learn and follow" %}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3">
+                                        <i class="fas fa-chart-line fa-2x text-warning mb-3"></i>
+                                        <h5>{% translate "Progressive" %}</h5>
+                                        <p class="small">{% translate "Scalable as you advance" %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="main-section text-center py-5">
+                <div class="container">
+                    <h3 class="font-bebas-neue display-5 uppercase mb-4">
+                        {% translate "Ready to Start Your Fitness Journey?" %}
+                    </h3>
+                    <p class="lead mb-4">
+                        {% translate "Join wger today and create your personalized workout routines" %}
+                    </p>
+                    <a role="button"
+                       class="btn btn-primary rounded-1 bg-dark-blue py-2 px-5"
+                       href="{% if user.is_authenticated %}
+                                {% url 'core:index' %}
+                            {% else %}
+                                {% url 'core:user:login' %}
+                            {% endif %}">
+                        {% translate "Get Started" %}
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="d-grid gap-3 p-5 footer-bg">
+        <div class="container-xl">
+            <div class="d-flex pb-4">
+                <img src="{% static 'images/logos/logo-font-inverse.svg' %}" alt="wger logo"/>
+            </div>
+            <div class="row row-cols-lg-4 row-cols-sm-1 g-2 border-bottom border-light pb-3">
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 text-light ps-0">
+                            <h1 class="fs-5 text-white">{% translate "Account" %}</h1>
+                        </li>
+                        {% if allow_registration %}
+                            <li class="list-group-item bg-transparent border-0 text-light fw-lighter ps-0">
+                                <a href="{% url 'core:user:registration' %}">
+                                    {% translate "Register" %}
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="list-group-item bg-transparent border-0 text-light fw-lighter ps-0">
+                            <a href="{% url 'core:user:login' %}">
+                                {% translate "Login" %}
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 text-light fw-lighter ps-0">
+                            <a href="{% url 'core:index' %}">
+                                {% translate "Dashboard" %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 text-light">
+                            <h1 class="fs-5 text-white">{% translate "Community" %}</h1>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 text-light fw-lighter">
+                            <a href="{% url 'exercise:exercise:overview' %}">
+                                {% translate "Exercises" %}
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 text-light fw-lighter">
+                            <a href="https://discord.gg/rPWFv6W" target="_blank"
+                               rel="noopener noreferrer">
+                                {% translate "Discord" %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 text-light">
+                            <h1 class="fs-5 text-white">{% translate "Software" %}</h1>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 text-light">
+                            <a href="https://github.com/wger-project" target="_blank"
+                               rel="noopener noreferrer">
+                                {% translate "Source Code" %}
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 text-light">
+                            <a href="{% url 'software:api' %}">{% translate "REST API" %}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 text-light">
+                            <h1 class="fs-5 text-white">
+                                <a href="https://github.com/wger-project" target="_blank"
+                                   rel="noopener noreferrer">
+                                    <i class="fab fa-github px-2"></i>
+                                </a>
+                                <a href="https://discord.gg/rPWFv6W" target="_blank"
+                                   rel="noopener noreferrer">
+                                    <i class="fab fa-discord px-2"></i>
+                                </a>
+                            </h1>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0">
+                            <a href="{% url 'software:tos' %}"
+                               class="text-light fw-lighter footer-link">
+                                {% translate "Terms of service" %}
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0">
+                            <a href="{% url 'core:imprint' %}">
+                                Privacy policy
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
