@@ -12,3 +12,15 @@ run = ["sh", "-c", "docker compose up -d"]
 localPort = 8000
 externalPort = 80
 exposeLocalhost = true
+
+[workflows]
+runButton = "Run Django Server"
+
+[[workflows.workflow]]
+name = "Run Django Server"
+author = 44393712
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python manage.py runserver 0.0.0.0:5000"
