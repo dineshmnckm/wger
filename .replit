@@ -1,0 +1,14 @@
+modules = ["python-3.10", "web"]
+run = "docker compose up -d"
+
+[nix]
+channel = "stable-25_05"
+packages = ["bash", "docker_28", "freetype", "glibcLocales", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "postgresql", "psycopg2", "sqlite", "tcl", "tk", "zlib"]
+
+[deployment]
+run = ["sh", "-c", "docker compose up -d"]
+
+[[ports]]
+localPort = 8000
+externalPort = 80
+exposeLocalhost = true
